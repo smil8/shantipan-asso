@@ -59,30 +59,52 @@ body{
   height: 720px;
 
   background-image: url("fond.png");
-  background-size: cover;
-  background-position: 30% center;
+  background-size: 100%;
+  background-position: 0.50% center; /* 🔥 clé : on décale le pan */
 
   display:flex;
   align-items:center;
 }
 
+/* overlay léger */
+
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    to right,
-    rgba(120,80,40,0.45) 0%,
-    rgba(140,100,60,0.4) 25%,
-    rgba(200,170,140,0.28) 45%,
-    rgba(231,214,194,0.14) 65%,
-    rgba(231,214,194,0.05) 80%,
-    rgba(231,214,194,0) 95%
+
+  background:
+
+  /* ☀️ POINT CHAUD (beaucoup plus diffus et étiré) */
+  radial-gradient(
+    120% 80% at 75% -15%,
+    rgba(255, 235, 190, 0.55) 0%,
+    rgba(255, 220, 170, 0.38) 20%,
+    rgba(255, 200, 140, 0.22) 38%,
+    rgba(255, 190, 130, 0.12) 52%,
+    rgba(255, 180, 120, 0.06) 65%,
+    transparent 78%
+  ),
+
+  /* 🌿 FILTRAGE LUMIÈRE (moins centré, plus organique) */
+  radial-gradient(
+    60% 50% at 28% 18%,
+    rgba(255,255,255,0.10),
+    transparent 70%
   ),
   radial-gradient(
-    at 20% 40%,
-    rgba(255,255,255,0.12),
-    transparent 50%
+    50% 40% at 42% 6%,
+    rgba(255,255,255,0.06),
+    transparent 75%
+  ),
+
+  /* ☀️ BASE (adoucie + moins contrastée) */
+  linear-gradient(
+    162deg,
+    rgba(255, 240, 210, 0.46) 0%,
+    rgba(255, 235, 200, 0.26) 28%,
+    rgba(200, 170, 140, 0.14) 60%,
+    rgba(60,30,10,0.38) 100%
   );
 }
 
@@ -104,20 +126,53 @@ body{
   gap:22px;
 }
 
-/* LOGO ALIGNÉ PRO */
+/* LOGO ALIGNÉ */
+
 .hero-brand{
   display:flex;
   align-items:center;
-  gap:20px;
+  gap:14px;
+  margin-bottom:12px;
 }
 
+/* logo rond */
 .hero-logo-round{
-  width:90px;
+  width:370px;
   opacity:0.9;
 }
 
+/* logo texte */
 .hero-logo-text{
-  width:180px;
+  width:370px;
+  transform:translateX(-200px); /* 🔥 rapprochement fin */
+}
+
+/* TEXTE */
+.hero h1{
+  font-size:44px;
+  line-height:1.25;
+  margin:0;
+}
+
+.hero p{
+  font-size:15px;
+  opacity:0.75;
+  margin:0;
+}
+
+
+.btn{
+  padding:14px 22px;
+  border-radius:30px;
+  border:1px solid var(--brown);
+  text-decoration:none;
+  color:var(--brown);
+  font-size:14px;
+}
+
+.btn.primary{
+  background:var(--brown);
+  color:white;
 }
 
 /* TEXTE */
@@ -136,11 +191,12 @@ body{
 /* CTA */
 .buttons{
   display:flex;
-  gap:18px;
+  gap:70px;
   margin-top:25px;
   align-items:center;
 }
 
+/* BASE */
 .btn{
   padding:14px 24px;
   border-radius:999px;
@@ -149,11 +205,13 @@ body{
   display:flex;
   align-items:center;
   gap:10px;
+  
   transition:all 0.25s ease;
   white-space:nowrap;
   font-weight:700;
 }
 
+/* 🔥 PRIMARY  (Voir les prochaines rencontres) */
 .btn.primary{
   background:#6B3E1E;
   color:#fff;
@@ -165,33 +223,35 @@ body{
   transform:translateY(-1px);
 }
 
+/* 🔥 OUTLINE (Rejoindre la communaute) */
 .btn.outline{
-  border:1.5px solid rgba(107,62,30,0.6);
+  border:1.5px solid #6B3E1E;
+  background:#E7D2B8;
   color:#6B3E1E;
-  background:transparent;
   font-weight:600;
 }
 
 .btn.outline:hover{
-  border-color:#6B3E1E;
-  background:rgba(107,62,30,0.06);
-  transform:translateY(-1px);
+  background:#EAD8C4;
 }
 
+/* 🔥 GHOST (Nous contacter) */
 .btn.ghost{
-  border:2px solid rgba(107,62,30,0.4);
-  background:rgba(250,227,212,0.35);
+  border:1.5px solid rgba(107,62,30,1);
+  background:#E7D2B8;
   color:#6B3E1E;
-  font-weight:800;
-  backdrop-filter:blur(6px);
+  font-weight:600;
+
+
 }
 
 .btn.ghost:hover{
-  background:rgba(255,255,255,0.55);
-  border-color:rgba(107,62,30,0.7);
+  background:rgba(107,62,30,0.6);
+  border-color:#6B3E1E;
   transform:translateY(-1px);
 }
 
+/* 🔥 ICON */
 .btn .icon{
   font-size:15px;
   display:flex;
@@ -221,18 +281,24 @@ body{
 
 .card{
   background:var(--card);
-  border-radius:15px;
+  border-radius:18px;
   padding:25px;
   flex:1;
-  box-shadow:0 10px 20px rgba(0,0,0,0.05);
+
+  border:1px solid rgba(107,62,30,0.12);   /* 🔥 bordure subtile */
+  box-shadow:0 8px 20px rgba(0,0,0,0.04);  /* 🔥 profondeur douce */
+
+  transition:all 0.25s ease;
 }
 
-.badge{
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-  color:white;
-  background:var(--brown);
+.card:hover{
+  transform:translateY(-8px);
+
+  box-shadow:
+    0 20px 45px rgba(107,62,30,0.15),  /* 🔥 ombre chaude principale */
+    0 5px 12px rgba(0,0,0,0.05);       /* 🔥 profondeur */
+
+  border-color:rgba(107,62,30,0.35);
 }
 
 .badge.green{background:var(--green)}
@@ -253,35 +319,16 @@ body{
 .brown{background:var(--brown)}
 .green{background:var(--green)}
 
-.side{
-  background:var(--card);
-  padding:30px;
-  border-radius:20px;
-}
-
-.check{
-  margin:10px 0;
-}
-
-.side button{
-  width:100%;
-  margin-top:20px;
-  padding:12px;
-  border:none;
-  border-radius:25px;
-  background:var(--brown);
-  color:white;
-}
-
 /* ================= ABOUT ================= */
 .about{
   display:grid;
-  grid-template-columns:450px 1fr;
-  gap:60px;
+  grid-template-columns:500px 1fr;
+  gap:40px;
   align-items:center;
-  background:var(--bg-light);
-  padding:60px;
-  border-radius:20px;
+}
+
+.about-img{
+  width:100%;
 }
 
 .about-img img{
@@ -330,86 +377,169 @@ iframe{
   opacity:0.8;
 }
 
-/* ================= RESPONSIVE (AJOUT UNIQUEMENT) ================= */
-@media(max-width:900px){
-
-  .container{
-    padding:0 20px;
-  }
-
-  .nav-inner{
-    flex-direction:column;
-    gap:15px;
-  }
-
-  .nav a{
-    margin-left:10px;
-    font-size:14px;
-  }
-
-  .hero{
-    height:auto;
-    padding:80px 0;
-    background-position:60% center;
-  }
-
-  .hero-left{
-    max-width:100%;
-    align-items:center;
-    text-align:center;
-  }
-
-  .hero-brand{
-    flex-direction:column;
-    gap:10px;
-  }
-
-  .hero-logo-round{width:70px;}
-  .hero-logo-text{width:150px;}
-
-  .hero h1{
-    font-size:28px;
-  }
-
-  .buttons{
-    flex-direction:column;
-    width:100%;
-  }
-
-  .btn{
-    width:100%;
-    justify-content:center;
-  }
-
-  .events-grid{
-    grid-template-columns:1fr;
-  }
-
-  .cards{
-    flex-direction:column;
-  }
-
-  .about{
-    grid-template-columns:1fr;
-    text-align:center;
-    padding:30px;
-  }
-
-  .calendar{
-    grid-template-columns:1fr;
-  }
-
-  iframe{
-    height:300px;
-  }
-
-  .contact{
-    flex-direction:column;
-    gap:20px;
-    padding:30px;
-  }
-
+/* IMAGE PRO */
+.about{
+  display:grid;
+  grid-template-columns:450px 1fr;
+  gap:60px;
+  align-items:center;
+  background:var(--bg-light);
+  padding:60px;
+  border-radius:20px;
 }
+
+.about-img img{
+  width:100%;
+  display:block;
+  border-radius:20px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px){
+  .hero{height:auto;padding:80px 0}
+  .events-grid{grid-template-columns:1fr}
+  .cards{flex-direction:column}
+  .about{grid-template-columns:1fr;text-align:center}
+  .calendar{grid-template-columns:1fr}
+}
+/* ===== TITRE EVENTS (⭐ Les 3 prochaines rencontres) ===== */
+
+.section-header{
+  grid-column: 1 / -1;  
+  margin-bottom:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;  /* 🔥 clé : alignement gauche */
+}
+
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.section-title h2{
+  font-size:25px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin:0;
+  color:#6B3E1E;
+}
+
+.star{
+  font-size:35px;
+  margin-right:6px;
+  text-align:center;
+  display:inline-block;
+  opacity:0.9;
+  color:#6B3E1E;
+}
+
+.section-subtitle{
+  font-size:16px;
+  color:#7a5a3a;
+  opacity:0.8;
+  margin-top:0.5px;
+  margin-left:42px; 
+}
+
+/* ================= JOIN CARD ================= */
+
+.join-card{
+  position:relative;
+  background:linear-gradient(180deg,#F6EBDD,#F1E2CF);
+  padding:35px 30px;
+  border-radius:20px;
+
+  border:1px solid rgba(107,62,30,0.15);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.05),
+    0 2px 8px rgba(107,62,30,0.08);
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+/* HEADER */
+.join-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.join-header h3{
+  margin:0;
+  font-size:18px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.join-icon{
+  font-size:20px;
+}
+
+/* DESC */
+.join-desc{
+  font-size:14px;
+  color:#6B3E1E;
+  opacity:0.8;
+}
+
+/* LIST */
+.join-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.join-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+
+.join-item span{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:1px solid #6B3E1E;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+}
+
+/* CTA */
+.join-btn{
+  margin-top:10px;
+  text-align:center;
+  padding:14px;
+  border-radius:30px;
+  background:#6B3E1E;
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.25s;
+}
+
+.join-btn:hover{
+  background:#5a3418;
+  transform:translateY(-2px);
+}
+
+/* FOOTER */
+.join-footer{
+  text-align:center;
+  font-size:13px;
+  color:#a46b3c;
+  margin-top:5px;
+}
+
 
 </style>
 </head>
@@ -432,7 +562,10 @@ iframe{
 
 <!-- HERO -->
 <section class="hero">
+
   <div class="hero-inner">
+
+    <!-- bloc gauche : logo + texte -->
     <div class="hero-left">
 
       <div class="hero-brand">
@@ -452,33 +585,42 @@ iframe{
 
       <div class="buttons">
         <a class="btn primary">Voir les prochaines rencontres</a>
-        <a class="btn">Rejoindre la communauté</a>
-        <a class="btn ghost">
-          <span class="icon">
-            <svg viewBox="0 0 24 24" width="16" height="16">
-              <path d="M3 6h18v12H3z" fill="none" stroke="#6B3E1E" stroke-width="1.6"/>
-              <path d="M3 7l9 6 9-6" fill="none" stroke="#6B3E1E" stroke-width="1.6"/>
-            </svg>
-          </span>
-          Nous contacter
-        </a>
-      </div>
-
-    </div>
+        <a class="btn outline">Rejoindre la communauté</a>
+  <a class="btn ghost">
+    <span class="icon">
+      <svg viewBox="0 0 24 24" width="16" height="16">
+        <path d="M3 6h18v12H3z" fill="none" stroke="#6B3E1E" stroke-width="1.6"/>
+        <path d="M3 7l9 6 9-6" fill="none" stroke="#6B3E1E" stroke-width="1.6"/>
+      </svg>
+    </span>
+    Nous contacter
+  </a>
+</div>
   </div>
+
 </section>
 
 <!-- EVENTS -->
 <section class="section events">
 <div class="container">
-<h2>Les 3 prochaines rencontres</h2>
+
+<div class="section-header">
+  <div class="section-title">
+    <span class="star">★</span>
+    <h2>Les 3 prochaines rencontres</h2>
+  </div>
+  <p class="section-subtitle">
+    Venez vivre des moments uniques autour du handpan.
+  </p>
+</div>
 
 <div class="events-grid">
+
 <div class="cards">
 
 <div class="card">
 <span class="badge">Concert</span>
-<div class="meta">📅 26 Avril 2026</div>
+<div class="meta date">26 Avril 2026</div>
 <h3>Les Floralises</h3>
 <div class="meta">📍 Florensac</div>
 <button class="brown">Je veux venir</button>
@@ -503,32 +645,58 @@ iframe{
 </div>
 
 <div class="side">
-<h3>👥 Rejoindre l’aventure</h3>
-<p>En devenant membre, vous soutenez l’association.</p>
+<div class="join-card">
 
-<div class="check">✔ Accès aux événements</div>
-<div class="check">✔ Tarifs préférentiels</div>
-<div class="check">✔ Carte membre</div>
-<div class="check">✔ Rencontres privilégiées</div>
+  <div class="join-header">
+    <span class="join-icon">👥</span>
+    <h3>Rejoindre l’aventure</h3>
+  </div>
 
-<button>Rejoindre la communauté</button>
+  <p class="join-desc">
+    En devenant membre, vous soutenez l’association
+    et profitez d’avantages exclusifs.
+  </p>
+
+  <div class="join-list">
+    <div class="join-item"><span>✓</span> Accès aux événements</div>
+    <div class="join-item"><span>✓</span> Tarifs préférentiels</div>
+    <div class="join-item"><span>✓</span> Carte membre unique</div>
+    <div class="join-item"><span>✓</span> Rencontres privilégiées</div>
+    <div class="join-item"><span>✓</span> Soutien aux projets</div>
+  </div>
+
+  <a href="#" class="join-btn">
+    Rejoindre la communauté
+  </a>
+
+  <p class="join-footer">
+    Ensemble, faisons vibrer le handpan.
+    </p>
+
+  </div>
+
 </div>
-
-</div>
-</div>
-</section>
-
 <!-- ABOUT -->
 <section class="section about container">
+
   <div class="about-img">
-    <img src="b4_v3.png">
+    <img src="b4_v3.png" alt="Shantipan">
   </div>
+
   <div>
     <h2><span class="star">★</span> À propos de Shantipan Asso</h2>
+
     <p>
-      Née en 2026 dans le sud de la France...
+      Née en 2026 dans le sud de la France, Shantipan Asso fait vibrer le handpan sous toutes ses formes.<br><br>
+      Concerts intimistes, jams acoustiques, rencontres humaines… l’association crée des espaces où la musique devient partage.<br><br>
+      Ouverte à tous les niveaux, elle invite chacun à venir explorer, écouter ou jouer.
+    </p>
+
+    <p style="font-style:italic;color:#a46b3c;margin-top:20px;">
+      La musique nous relie, le handpan nous rassemble.
     </p>
   </div>
+
 </section>
 
 <!-- CALENDAR -->
@@ -537,14 +705,34 @@ iframe{
 <h3>Calendrier des événements</h3>
 <p>Mise à jour en temps réel</p>
 </div>
+
 <iframe src="https://calendar.google.com/calendar/embed?src=dG9tcmVib3Juc0BnbWFpbC5jb20&ctz=Europe/Paris"></iframe>
 </section>
 
 <!-- CONTACT -->
 <section class="contact">
-  <div class="contact-item">📸 Instagram</div>
-  <div class="contact-item">📧 Email</div>
-  <div class="contact-item">📞 Téléphone</div>
+
+  <div class="contact-item">
+    <a href="https://instagram.com/shantipan_handpan" target="_blank">
+      📸
+      <p>Instagram</p>
+    </a>
+  </div>
+
+  <div class="contact-item">
+    <a href="mailto:Shantipan.asso@proton.me">
+      📧
+      <p>Shantipan.asso@proton.me</p>
+    </a>
+  </div>
+
+  <div class="contact-item">
+    <a href="tel:+33612345678">
+      📞
+      <p>06 12 34 56 78</p>
+    </a>
+  </div>
+
 </section>
 
 <!-- FOOTER -->
