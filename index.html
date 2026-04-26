@@ -1,744 +1,1134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shantipan Asso</title>
-
-<style>
-
-/* ================= BASE ================= */
-:root{
-  --bg:#EFE3D4;
-  --bg-light:#F6EBDD;
-  --card:#F4E8D9;
-  --brown:#6B3E1E;
-  --green:#4F5F36;
-}
-
-body{
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background:var(--bg);
-  color:var(--brown);
-}
-
-/* ================= CONTAINER ================= */
-.container{
-  max-width:1300px;
-  margin:auto;
-  padding:0 40px;
-}
-
-/* ================= NAV ================= */
-.nav{
-  background:#f3e7d7;
-}
-
-.nav-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 0;
-}
-
-.nav img{
-  height:50px;
-}
-
-.nav a{
-  margin-left:30px;
-  text-decoration:none;
-  color:var(--brown);
-  font-weight:500;
-}
-
-/* ================= HERO ================= */
-.hero{
-  position: relative;
-  height: 720px;
-
-  background-image: url("fond.png");
-  background-size: 100%;
-  background-position: 0.50% center; /* 🔥 clé : on décale le pan */
-
-  display:flex;
-  align-items:center;
-}
-
-/* overlay léger */
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:
-
-  /* ☀️ POINT CHAUD (beaucoup plus diffus et étiré) */
-  radial-gradient(
-    120% 80% at 75% -15%,
-    rgba(255, 235, 190, 0.55) 0%,
-    rgba(255, 220, 170, 0.38) 20%,
-    rgba(255, 200, 140, 0.22) 38%,
-    rgba(255, 190, 130, 0.12) 52%,
-    rgba(255, 180, 120, 0.06) 65%,
-    transparent 78%
-  ),
-
-  /* 🌿 FILTRAGE LUMIÈRE (moins centré, plus organique) */
-  radial-gradient(
-    60% 50% at 28% 18%,
-    rgba(255,255,255,0.10),
-    transparent 70%
-  ),
-  radial-gradient(
-    50% 40% at 42% 6%,
-    rgba(255,255,255,0.06),
-    transparent 75%
-  ),
-
-  /* ☀️ BASE (adoucie + moins contrastée) */
-  linear-gradient(
-    162deg,
-    rgba(255, 240, 210, 0.46) 0%,
-    rgba(255, 235, 200, 0.26) 28%,
-    rgba(200, 170, 140, 0.14) 60%,
-    rgba(60,30,10,0.38) 100%
-  );
-}
-
-/* conteneur centré PRO */
-.hero-inner{
-  position:relative;
-  z-index:2;
-  width:100%;
-  max-width:1200px;
-  margin:auto;
-  padding:0 40px;
-}
-
-/* bloc gauche propre */
-.hero-left{
-  max-width:520px;
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-
-/* LOGO ALIGNÉ */
-
-.hero-brand{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:12px;
-}
-
-/* logo rond */
-.hero-logo-round{
-  width:370px;
-  opacity:0.9;
-}
-
-/* logo texte */
-.hero-logo-text{
-  width:370px;
-  transform:translateX(-200px); /* 🔥 rapprochement fin */
-}
-
-/* TEXTE */
-.hero h1{
-  font-size:44px;
-  line-height:1.25;
-  margin:0;
-}
-
-.hero p{
-  font-size:15px;
-  opacity:0.75;
-  margin:0;
-}
-
-
-.btn{
-  padding:14px 22px;
-  border-radius:30px;
-  border:1px solid var(--brown);
-  text-decoration:none;
-  color:var(--brown);
-  font-size:14px;
-}
-
-.btn.primary{
-  background:var(--brown);
-  color:white;
-}
-
-/* TEXTE */
-.hero h1{
-  font-size:46px;
-  line-height:1.25;
-  margin:0;
-}
-
-.hero p{
-  font-size:15px;
-  opacity:0.7;
-  margin:0;
-}
-
-/* CTA */
-.buttons{
-  display:flex;
-  gap:70px;
-  margin-top:25px;
-  align-items:center;
-}
-
-/* BASE */
-.btn{
-  padding:14px 24px;
-  border-radius:999px;
-  font-size:14px;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  
-  transition:all 0.25s ease;
-  white-space:nowrap;
-  font-weight:700;
-}
-
-/* 🔥 PRIMARY  (Voir les prochaines rencontres) */
-.btn.primary{
-  background:#6B3E1E;
-  color:#fff;
-  border:none;
-}
-
-.btn.primary:hover{
-  background:#5a3418;
-  transform:translateY(-1px);
-}
-
-/* 🔥 OUTLINE (Rejoindre la communaute) */
-.btn.outline{
-  border:1.5px solid #6B3E1E;
-  background:#E7D2B8;
-  color:#6B3E1E;
-  font-weight:600;
-}
-
-.btn.outline:hover{
-  background:#EAD8C4;
-}
-
-/* 🔥 GHOST (Nous contacter) */
-.btn.ghost{
-  border:1.5px solid rgba(107,62,30,1);
-  background:#E7D2B8;
-  color:#6B3E1E;
-  font-weight:600;
-
-
-}
-
-.btn.ghost:hover{
-  background:rgba(107,62,30,0.6);
-  border-color:#6B3E1E;
-  transform:translateY(-1px);
-}
-
-/* 🔥 ICON */
-.btn .icon{
-  font-size:15px;
-  display:flex;
-  align-items:center;
-}
-
-/* ================= SECTIONS ================= */
-.section{
-  padding:80px 0;
-}
-
-/* ================= EVENTS ================= */
-.events{
-  background:var(--bg-light);
-}
-
-.events-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:40px;
-}
-
-.cards{
-  display:flex;
-  gap:20px;
-}
-
-.card{
-  background:var(--card);
-  border-radius:18px;
-  padding:25px;
-  flex:1;
-
-  border:1px solid rgba(107,62,30,0.12);   /* 🔥 bordure subtile */
-  box-shadow:0 8px 20px rgba(0,0,0,0.04);  /* 🔥 profondeur douce */
-
-  transition:all 0.25s ease;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-
-  box-shadow:
-    0 20px 45px rgba(107,62,30,0.15),  /* 🔥 ombre chaude principale */
-    0 5px 12px rgba(0,0,0,0.05);       /* 🔥 profondeur */
-
-  border-color:rgba(107,62,30,0.35);
-}
-
-.badge.green{background:var(--green)}
-
-.meta{
-  font-size:14px;
-  margin:10px 0;
-}
-
-.card button{
-  margin-top:15px;
-  padding:10px;
-  border:none;
-  border-radius:20px;
-  color:white;
-}
-
-.brown{background:var(--brown)}
-.green{background:var(--green)}
-
-/* ================= ABOUT ================= */
-.about{
-  display:grid;
-  grid-template-columns:500px 1fr;
-  gap:40px;
-  align-items:center;
-}
-
-.about-img{
-  width:100%;
-}
-
-.about-img img{
-  width:100%;
-  display:block;
-  border-radius:20px;
-}
-
-/* ================= CALENDAR ================= */
-.calendar{
-  display:grid;
-  grid-template-columns:1fr 2fr;
-  gap:30px;
-}
-
-iframe{
-  width:100%;
-  height:350px;
-  border:none;
-  border-radius:10px;
-}
-
-/* ================= CONTACT ================= */
-.contact{
-  display:flex;
-  justify-content:space-around;
-  background:#f4e8d9;
-  padding:40px;
-}
-
-.contact-item{
-  text-align:center;
-}
-
-/* ================= FOOTER ================= */
-.footer{
-  background:var(--brown);
-  color:white;
-  text-align:center;
-  padding:12px;
-}
-
-.star{
-  color:#a46b3c;
-  font-size:20px;
-  opacity:0.8;
-}
-
-/* IMAGE PRO */
-.about{
-  display:grid;
-  grid-template-columns:450px 1fr;
-  gap:60px;
-  align-items:center;
-  background:var(--bg-light);
-  padding:60px;
-  border-radius:20px;
-}
-
-.about-img img{
-  width:100%;
-  display:block;
-  border-radius:20px;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px){
-  .hero{height:auto;padding:80px 0}
-  .events-grid{grid-template-columns:1fr}
-  .cards{flex-direction:column}
-  .about{grid-template-columns:1fr;text-align:center}
-  .calendar{grid-template-columns:1fr}
-}
-/* ===== TITRE EVENTS (⭐ Les 3 prochaines rencontres) ===== */
-
-.section-header{
-  grid-column: 1 / -1;  
-  margin-bottom:30px;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;  /* 🔥 clé : alignement gauche */
-}
-
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
-
-.section-title h2{
-  font-size:25px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  margin:0;
-  color:#6B3E1E;
-}
-
-.star{
-  font-size:35px;
-  margin-right:6px;
-  text-align:center;
-  display:inline-block;
-  opacity:0.9;
-  color:#6B3E1E;
-}
-
-.section-subtitle{
-  font-size:16px;
-  color:#7a5a3a;
-  opacity:0.8;
-  margin-top:0.5px;
-  margin-left:42px; 
-}
-
-/* ================= JOIN CARD ================= */
-
-.join-card{
-  position:relative;
-  background:linear-gradient(180deg,#F6EBDD,#F1E2CF);
-  padding:35px 30px;
-  border-radius:20px;
-
-  border:1px solid rgba(107,62,30,0.15);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.05),
-    0 2px 8px rgba(107,62,30,0.08);
-
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-/* HEADER */
-.join-header{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.join-header h3{
-  margin:0;
-  font-size:18px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.join-icon{
-  font-size:20px;
-}
-
-/* DESC */
-.join-desc{
-  font-size:14px;
-  color:#6B3E1E;
-  opacity:0.8;
-}
-
-/* LIST */
-.join-list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.join-item{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:14px;
-}
-
-.join-item span{
-  width:20px;
-  height:20px;
-  border-radius:50%;
-  border:1px solid #6B3E1E;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-}
-
-/* CTA */
-.join-btn{
-  margin-top:10px;
-  text-align:center;
-  padding:14px;
-  border-radius:30px;
-  background:#6B3E1E;
-  color:white;
-  text-decoration:none;
-  font-weight:600;
-  transition:0.25s;
-}
-
-.join-btn:hover{
-  background:#5a3418;
-  transform:translateY(-2px);
-}
-
-/* FOOTER */
-.join-footer{
-  text-align:center;
-  font-size:13px;
-  color:#a46b3c;
-  margin-top:5px;
-}
-
-
-</style>
-</head>
-
-<body>
-
-<!-- NAV -->
-<div class="nav">
-  <div class="container nav-inner">
-    <img src="logo.png">
-    <div>
-      <a>Accueil</a>
-      <a>Événements</a>
-      <a>Adhérer</a>
-      <a>À propos</a>
-      <a>Nous contacter</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link rel="icon" href="logo.svg" type="image/svg+xml" sizes="any" />
+    <title>Shantipan Asso</title>
+
+    <style>
+      /* ================= BASE ================= */
+      :root {
+        --bg: #efe3d4;
+        --bg-light: #f6ebdd;
+        --card: #f4e8d9;
+        --brown: #6b3e1e;
+        --green: #4f5f36;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--brown);
+      }
+
+      a,
+      button {
+        cursor: pointer;
+      }
+
+      p {
+        font-family: Inter, sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          Playfair Display,
+          serif;
+      }
+
+      /* ================= CONTAINER ================= */
+      .container {
+        max-width: 1300px;
+        margin: auto;
+        padding: 0 40px;
+      }
+
+      /* ================= NAV ================= */
+      .nav {
+        background: #f3e7d7;
+        font-family: Inter, sans-serif;
+      }
+
+      .nav-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 30px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .nav img {
+        height: 50px;
+      }
+
+      .nav a {
+        margin-left: 0;
+        text-decoration: none;
+        color: var(--brown);
+        font-weight: 400;
+        font-size: 14px;
+        display: inline-block;
+        padding-bottom: 8px;
+        border-bottom: 2px solid transparent;
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        border-bottom-color: var(--brown);
+      }
+
+      /* ================= HERO ================= */
+      .hero {
+        position: relative;
+
+        background-image: url("fond.png");
+        background-size: 100%;
+        background-position: 0.5% center;
+        background-repeat: no-repeat;
+        /* 🔥 clé : on décale le pan */
+
+        display: flex;
+        align-items: center;
+      }
+
+      /* overlay léger */
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background:
+
+                /* ☀️ POINT CHAUD (beaucoup plus diffus et étiré) */
+          radial-gradient(
+            120% 80% at 75% -15%,
+            rgba(255, 235, 190, 0.55) 0%,
+            rgba(255, 220, 170, 0.38) 20%,
+            rgba(255, 200, 140, 0.22) 38%,
+            rgba(255, 190, 130, 0.12) 52%,
+            rgba(255, 180, 120, 0.06) 65%,
+            transparent 78%
+          ),
+          /* 🌿 FILTRAGE LUMIÈRE (moins centré, plus organique) */
+          radial-gradient(
+              60% 50% at 28% 18%,
+              rgba(255, 255, 255, 0.1),
+              transparent 70%
+            ),
+          radial-gradient(
+            50% 40% at 42% 6%,
+            rgba(255, 255, 255, 0.06),
+            transparent 75%
+          ),
+          /* ☀️ BASE (adoucie + moins contrastée) */
+          linear-gradient(
+              162deg,
+              rgba(255, 240, 210, 0.46) 0%,
+              rgba(255, 235, 200, 0.26) 28%,
+              rgba(200, 170, 140, 0.14) 60%,
+              rgba(60, 30, 10, 0.38) 100%
+            );
+      }
+
+      /* conteneur centré PRO */
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* bloc gauche propre */
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 1000px;
+        margin: 40px auto 40px auto;
+        gap: 60px;
+      }
+
+      /* LOGO ALIGNÉ */
+
+      .hero-brand {
+        display: flex;
+        align-items: start;
+        gap: 4px;
+        flex-direction: column;
+      }
+
+      .hero-main {
+        display: flex;
+        width: 100%;
+        gap: 60px;
+      }
+
+      .hero-text {
+        justify-content: center;
+        align-items: start;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        p {
+          width: 100%;
+        }
+      }
+
+      /* logo rond */
+      .hero-logo-round {
+        opacity: 0.9;
+      }
+
+      /* TEXTE */
+      .hero h1 {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1.25;
+        margin: 0;
+        font-family:
+          Playfair Display,
+          serif;
+      }
+
+      .hero p {
+        font-size: 16px;
+        opacity: 0.9;
+        line-height: 1.5;
+        margin: 0;
+        font-family: Inter, sans-serif;
+      }
+
+      /* CTA */
+      .buttons {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        width: 100%;
+      }
+
+      /* BASE */
+      .btn {
+        padding: 13px 30px;
+        border-radius: 999px;
+        font-size: 14px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: Inter, sans-serif;
+
+        transition: all 0.25s ease;
+        white-space: nowrap;
+        font-weight: 600;
+      }
+
+      /* 🔥 PRIMARY  (Voir les prochaines rencontres) */
+      .btn.primary {
+        border: 1.5px solid #6b3e1e;
+        background: #6b3e1e;
+        color: #fff;
+      }
+
+      .btn.primary:hover {
+        background: #5a3418;
+        transform: translateY(-1px);
+      }
+
+      /* 🔥 OUTLINE (Rejoindre la communaute) */
+      .btn.outline {
+        border: 1.5px solid #6b3e1e;
+        background: #e7d2b8;
+        color: #6b3e1e;
+        font-weight: 600;
+      }
+
+      .btn.outline:hover {
+        background: #ead8c4;
+      }
+
+      /* 🔥 GHOST (Nous contacter) */
+      .btn.ghost {
+        border: 1.5px solid rgba(107, 62, 30, 1);
+        background: #e7d2b8;
+        color: #6b3e1e;
+        font-weight: 600;
+      }
+
+      .btn.ghost:hover {
+        background: rgba(107, 62, 30, 0.6);
+        border-color: #6b3e1e;
+        transform: translateY(-1px);
+      }
+
+      /* 🔥 ICON */
+      .btn .icon {
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      /* ================= SECTIONS ================= */
+      .section {
+        padding: 40px 0;
+      }
+
+      /* ================= EVENTS ================= */
+      .events {
+        background: var(--bg);
+      }
+
+      .events-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+        align-items: stretch;
+      }
+
+      .events-main {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .cards {
+        display: flex;
+        gap: 20px;
+        flex: 1;
+        align-items: stretch;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 18px;
+        padding: 25px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        border: 1px solid rgba(107, 62, 30, 0.12);
+        /* 🔥 bordure subtile */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+        /* 🔥 profondeur douce */
+
+        transition: all 0.25s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+
+        box-shadow:
+          0 20px 45px rgba(107, 62, 30, 0.15),
+          /* 🔥 ombre chaude principale */ 0 5px 12px rgba(0, 0, 0, 0.05);
+        /* 🔥 profondeur */
+
+        border-color: rgba(107, 62, 30, 0.35);
+      }
+
+      .badge.green {
+        background: var(--green);
+        border-color: var(--green);
+        color: #fff;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-self: flex-start;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1.5px solid var(--brown);
+        background: #e7d2b8;
+        color: var(--brown);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        font-family: Inter, sans-serif;
+      }
+
+      .card-meta {
+        display: flex;
+        align-items: end;
+        flex-direction: row;
+        gap: 6px;
+        margin-top: 14px;
+      }
+
+      .card-meta-icon {
+        font-size: 20px;
+        line-height: 1;
+        color: var(--brown);
+      }
+
+      .card-meta-text {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.35;
+        font-family: Inter, sans-serif;
+      }
+
+      .card h3 {
+        margin: 16px 0 0;
+        font-family:
+          Playfair Display,
+          serif;
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      .card button {
+        margin-top: auto;
+        align-self: flex-start;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        font-family: Inter, sans-serif;
+        font-weight: 600;
+      }
+
+      .brown {
+        background: var(--brown);
+      }
+
+      .green {
+        background: var(--green);
+      }
+
+      /* ================= CALENDAR ================= */
+      .calendar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px;
+        gap: 16px;
+      }
+
+      .calendar h3 {
+        font-size: 24px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 350px;
+        border: none;
+        border-radius: 10px;
+      }
+
+      /* ================= CONTACT ================= */
+      .contact {
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        background: #f4e8d9;
+        padding: 32px 40px;
+        gap: 0;
+      }
+
+      .contact-item {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding: 0 20px;
+      }
+
+      .contact-item + .contact-item {
+        border-left: 1px solid rgba(107, 62, 30, 0.2);
+      }
+
+      .contact-icon {
+        font-size: 28px;
+        color: var(--brown);
+      }
+
+      .contact-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        text-align: left;
+      }
+
+      .contact-title {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: Inter, sans-serif;
+      }
+
+      .contact-value {
+        margin: 0;
+        text-decoration: none;
+        color: var(--brown);
+        font-size: 15px;
+        font-family: Inter, sans-serif;
+      }
+
+      .contact-note {
+        margin: 0;
+        color: #7a5a3a;
+        font-size: 13px;
+        font-family: Inter, sans-serif;
+      }
+
+      /* ================= FOOTER ================= */
+      .footer {
+        background: var(--brown);
+        color: white;
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 12px 40px;
+      }
+
+      .footer-left,
+      .footer-right {
+        margin: 0;
+      }
+
+      .footer-heart {
+        color: #f2b3a6;
+        margin-right: 8px;
+      }
+
+      .star {
+        color: #a46b3c;
+        font-size: 20px;
+        opacity: 0.8;
+      }
+
+      /* IMAGE PRO */
+      .about-section {
+        background: var(--bg-light);
+        padding: 40px 0;
+      }
+
+      .about {
+        display: flex;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .about-img img {
+        display: block;
+        border-radius: 20px;
+      }
+
+      /* ================= RESPONSIVE ================= */
+      @media (max-width: 900px) {
+        .nav {
+          display: none;
+        }
+
+        .section {
+          padding: 16px 0;
+        }
+
+        .about-section {
+          padding: 16px 0;
+        }
+
+        .container {
+          padding: 0 20px;
+        }
+
+        .nav-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+          padding: 16px 20px;
+        }
+
+        .nav-links {
+          gap: 14px;
+          flex-wrap: wrap;
+        }
+
+        .hero {
+          height: auto;
+          padding: 48px 0;
+          background-size: cover;
+          background-position: center;
+        }
+
+        .hero-left {
+          gap: 30px;
+        }
+
+        .hero-main {
+          flex-direction: column;
+          gap: 24px;
+          align-items: center;
+        }
+
+        .hero-brand {
+          align-items: center;
+        }
+
+        .hero-text {
+          align-items: center;
+          text-align: center;
+        }
+
+        .hero-logo-round {
+          height: 140px;
+          width: auto;
+        }
+
+        .hero-logo-text {
+          height: 70px;
+          width: auto;
+        }
+
+        .buttons {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .btn {
+          justify-content: center;
+          width: 100%;
+        }
+
+        .events-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cards {
+          flex-direction: column;
+        }
+
+        .card button {
+          margin-top: 16px;
+        }
+
+        .about {
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: left;
+          gap: 24px;
+        }
+
+        .calendar {
+          grid-template-columns: 1fr;
+          margin-top: 16px;
+        }
+
+        .contact {
+          flex-direction: column;
+          gap: 18px;
+          padding: 24px 20px;
+        }
+
+        .contact-item {
+          justify-content: flex-start;
+          align-items: flex-start;
+          padding: 0 8px;
+        }
+
+        .contact-item + .contact-item {
+          border-left: none;
+          border-top: 1px solid rgba(107, 62, 30, 0.2);
+          padding-top: 18px;
+        }
+
+        .footer {
+          font-size: 12px;
+        }
+
+        .footer-inner {
+          padding: 12px 20px;
+        }
+      }
+
+      /* ===== TITRE EVENTS (⭐ Les 3 prochaines rencontres) ===== */
+
+      .section-header {
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* 🔥 clé : alignement gauche */
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .section-title h2 {
+        font-size: 25px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin: 0;
+        color: #6b3e1e;
+        font-family:
+          Playfair Display,
+          serif;
+      }
+
+      .about h2.title-with-icon {
+        font-size: 25px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #6b3e1e;
+      }
+
+      .title-with-icon {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+      }
+
+      .title-icon {
+        font-size: 35px;
+        line-height: 1;
+      }
+
+      .star {
+        font-size: 35px;
+        margin-right: 6px;
+        text-align: center;
+        display: inline-block;
+        opacity: 0.9;
+        color: #6b3e1e;
+      }
+
+      .section-subtitle {
+        font-size: 16px;
+        color: #7a5a3a;
+        opacity: 0.8;
+        margin-top: 16px;
+        margin-left: 0;
+        font-family: Inter, sans-serif;
+      }
+
+      /* ================= JOIN CARD ================= */
+
+      .join-card {
+        position: relative;
+        background: linear-gradient(180deg, #f6ebdd, #f1e2cf);
+        padding: 35px 30px;
+        border-radius: 20px;
+
+        border: 1px solid rgba(107, 62, 30, 0.15);
+
+        box-shadow:
+          0 10px 30px rgba(0, 0, 0, 0.05),
+          0 2px 8px rgba(107, 62, 30, 0.08);
+
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      /* HEADER */
+      .join-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .join-header h3 {
+        margin: 0;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family:
+          Playfair Display,
+          serif;
+      }
+
+      .join-icon {
+        font-size: 20px;
+      }
+
+      /* DESC */
+      .join-desc {
+        margin: 0;
+        font-size: 14px;
+        color: #6b3e1e;
+        opacity: 0.8;
+        font-family: Inter, sans-serif;
+      }
+
+      /* LIST */
+      .join-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .join-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-family: Inter, sans-serif;
+      }
+
+      .join-item span {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+
+      /* CTA */
+      .join-btn {
+        margin-top: 10px;
+        text-align: center;
+        padding: 14px;
+        border-radius: 30px;
+        background: #6b3e1e;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.25s;
+        font-family: Inter, sans-serif;
+      }
+
+      .join-btn:hover {
+        background: #5a3418;
+        transform: translateY(-2px);
+      }
+
+      /* FOOTER */
+      .join-footer {
+        text-align: center;
+        font-size: 13px;
+        color: #a46b3c;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <div class="nav">
+      <div class="container nav-inner">
+        <div class="nav-brand">
+          <img
+            src="logo.svg"
+            class="hero-logo-round"
+            alt="Logo Shantipan image"
+          />
+          <img
+            src="shantipan_asso.svg"
+            class="hero-logo-text"
+            alt="Logo Shantipan texte"
+          />
+        </div>
+        <div class="nav-links">
+          <a>Accueil</a>
+          <a>Événements</a>
+          <a>Adhérer</a>
+          <a>À propos</a>
+          <a>Nous contacter</a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- HERO -->
-<section class="hero">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <!-- bloc gauche : logo + texte -->
+        <div class="hero-left">
+          <div class="hero-main">
+            <div class="hero-brand">
+              <img
+                src="logo.svg"
+                class="hero-logo-round"
+                alt="Logo Shantipan image"
+                height="200px"
+              />
+              <img
+                src="shantipan_asso.svg"
+                class="hero-logo-text"
+                alt="Logo Shantipan texte"
+                height="90px"
+              />
+            </div>
+            <div class="hero-text">
+              <h1>
+                Des vibrations <br />qui rassemblent,<br />
+                des instants<br />
+                qui résonnent.
+              </h1>
 
-  <div class="hero-inner">
+              <p>
+                Concerts, jams, rencontres humaines…<br />
+                Bienvenue dans l’univers du handpan.
+              </p>
+            </div>
+          </div>
+          <div class="buttons">
+            <a class="btn primary">Voir les prochaines rencontres</a>
+            <a class="btn outline">Rejoindre la communauté</a>
+            <a class="btn outline">
+              <span class="icon material-symbols-outlined">mail</span>
+              Nous contacter
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- bloc gauche : logo + texte -->
-    <div class="hero-left">
+    <!-- EVENTS -->
+    <section class="section events">
+      <div class="container">
+        <div class="events-grid">
+          <div class="events-main">
+            <div class="section-header">
+              <div class="section-title">
+                <span class="material-symbols-outlined title-icon">
+                  star_shine
+                </span>
+                <h2>Les 3 prochaines rencontres</h2>
+              </div>
+              <p class="section-subtitle">
+                Venez vivre des moments uniques autour du handpan.
+              </p>
+            </div>
 
-      <div class="hero-brand">
-        <img src="logo.png" class="hero-logo-round">
-        <img src="shantipan_asso.png" class="hero-logo-text">
+            <div class="cards">
+              <div class="card">
+                <span class="badge">Concert</span>
+                <div class="card-meta">
+                  <span class="material-symbols-outlined card-meta-icon">
+                    calendar_month
+                  </span>
+                  <p class="card-meta-text">26 Avril 2026</p>
+                </div>
+                <h3>Les Floralises</h3>
+                <div class="card-meta">
+                  <span class="material-symbols-outlined card-meta-icon">
+                    location_on
+                  </span>
+                  <p class="card-meta-text">Florensac</p>
+                </div>
+                <button class="brown">Je veux venir</button>
+              </div>
+
+              <div class="card">
+                <span class="badge green">Découverte</span>
+                <div class="card-meta">
+                  <span class="material-symbols-outlined card-meta-icon">
+                    calendar_month
+                  </span>
+                  <p class="card-meta-text">05 Juillet 2026</p>
+                </div>
+                <h3>Session découverte</h3>
+                <div class="card-meta">
+                  <span class="material-symbols-outlined card-meta-icon">
+                    location_on
+                  </span>
+                  <p class="card-meta-text">Salon-de-Provence</p>
+                </div>
+                <button class="green">Je veux venir</button>
+              </div>
+
+              <div class="card">
+                <span class="badge">Concert</span>
+                <div class="card-meta">
+                  <span class="material-symbols-outlined card-meta-icon">
+                    calendar_month
+                  </span>
+                  <p class="card-meta-text">05 Juillet 2026</p>
+                </div>
+                <h3>Concert plein air</h3>
+                <div class="card-meta">
+                  <span class="material-symbols-outlined card-meta-icon">
+                    location_on
+                  </span>
+                  <p class="card-meta-text">Parc municipal</p>
+                </div>
+                <button class="brown">Je veux venir</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="side">
+            <div class="join-card">
+              <div class="join-header">
+                <span class="material-symbols-outlined">
+                  partner_exchange
+                </span>
+                <h3>Rejoindre l’aventure</h3>
+              </div>
+
+              <p class="join-desc">
+                En devenant membre, vous soutenez l’association et profitez
+                d’avantages exclusifs.
+              </p>
+
+              <div class="join-list">
+                <div class="join-item">
+                  <span class="material-symbols-outlined"> task_alt </span>
+                  Accès aux événements
+                </div>
+                <div class="join-item">
+                  <span class="material-symbols-outlined"> task_alt </span>
+                  Tarifs préférentiels
+                </div>
+                <div class="join-item">
+                  <span class="material-symbols-outlined"> task_alt </span>
+                  Carte membre unique
+                </div>
+                <div class="join-item">
+                  <span class="material-symbols-outlined"> task_alt </span>
+                  Rencontres privilégiées
+                </div>
+                <div class="join-item">
+                  <span class="material-symbols-outlined"> task_alt </span>
+                  Soutien aux projets
+                </div>
+              </div>
+
+              <a href="#" class="join-btn"> Rejoindre la communauté </a>
+
+              <p class="join-footer">Ensemble, faisons vibrer le handpan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about-section">
+      <div class="container about">
+        <div class="about-img">
+          <img src="b4_v3.png" alt="Shantipan" height="300" />
+        </div>
+
+        <div>
+          <h2 class="title-with-icon">
+            <span class="material-symbols-outlined title-icon">star_shine</span>
+            A PROPOS DE SHANTIPAN ASSO
+          </h2>
+
+          <p style="opacity: 0.8">
+            Né en 2026 dans le sud de la France, Shantipan Asso fait vibrer le
+            handpan sous toutes ses formes.<br /><br />
+            Concerts intimistes, jams acoustiques, rencontres humaines…
+            l’association crée des espaces où la musique devient partage.<br /><br />
+            Ouverte à tous les niveaux, elle invite chacun à venir explorer,
+            écouter ou jouer.
+          </p>
+
+          <p style="font-style: italic; color: #a46b3c; margin-top: 20px">
+            La musique nous relie, le handpan nous rassemble.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section class="section calendar container">
+      <div>
+        <h3 class="title-with-icon">
+          <span class="material-symbols-outlined title-icon"
+            >calendar_month</span
+          >
+          CALENDRIER DES EVENEMENTS
+        </h3>
+        <p style="opacity: 0.8">Les évènements sont mis à jour en temps réel</p>
       </div>
 
-      <h1>
-        Des vibrations qui rassemblent,<br>
-        des instants qui résonnent.
-      </h1>
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=dG9tcmVib3Juc0BnbWFpbC5jb20&ctz=Europe/Paris"
+      ></iframe>
+    </section>
 
-      <p>
-        Concerts, jams, rencontres humaines…<br>
-        Bienvenue dans l’univers du handpan.
-      </p>
+    <!-- CONTACT -->
+    <section class="contact">
+      <div class="contact-item">
+        <span class="material-symbols-outlined contact-icon">photo_camera</span>
+        <div class="contact-content">
+          <h3 class="contact-title">Instagram</h3>
+          <a
+            class="contact-value"
+            href="https://instagram.com/shantipan_handpan"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@shantipan_handpan</a
+          >
+          <p class="contact-note">Suivez-nous !</p>
+        </div>
+      </div>
 
-      <div class="buttons">
-        <a class="btn primary">Voir les prochaines rencontres</a>
-        <a class="btn outline">Rejoindre la communauté</a>
-  <a class="btn ghost">
-    <span class="icon">
-      <svg viewBox="0 0 24 24" width="16" height="16">
-        <path d="M3 6h18v12H3z" fill="none" stroke="#6B3E1E" stroke-width="1.6"/>
-        <path d="M3 7l9 6 9-6" fill="none" stroke="#6B3E1E" stroke-width="1.6"/>
-      </svg>
-    </span>
-    Nous contacter
-  </a>
-</div>
-  </div>
+      <div class="contact-item">
+        <span class="material-symbols-outlined contact-icon">mail</span>
+        <div class="contact-content">
+          <h3 class="contact-title">Email</h3>
+          <a class="contact-value" href="mailto:Shantipan.asso@proton.me"
+            >Shantipan.asso@proton.me</a
+          >
+          <p class="contact-note">Ecrivez-nous</p>
+        </div>
+      </div>
 
-</section>
+      <div class="contact-item">
+        <span class="material-symbols-outlined contact-icon">call</span>
+        <div class="contact-content">
+          <h3 class="contact-title">Téléphone</h3>
+          <a class="contact-value" href="tel:+33612345678">06 12 34 56 78</a>
+          <p class="contact-note">Appelez-nous</p>
+        </div>
+      </div>
+    </section>
 
-<!-- EVENTS -->
-<section class="section events">
-<div class="container">
-
-<div class="section-header">
-  <div class="section-title">
-    <span class="star">★</span>
-    <h2>Les 3 prochaines rencontres</h2>
-  </div>
-  <p class="section-subtitle">
-    Venez vivre des moments uniques autour du handpan.
-  </p>
-</div>
-
-<div class="events-grid">
-
-<div class="cards">
-
-<div class="card">
-<span class="badge">Concert</span>
-<div class="meta date">26 Avril 2026</div>
-<h3>Les Floralises</h3>
-<div class="meta">📍 Florensac</div>
-<button class="brown">Je veux venir</button>
-</div>
-
-<div class="card">
-<span class="badge green">Découverte</span>
-<div class="meta">📅 05 Juillet 2026</div>
-<h3>Session découverte</h3>
-<div class="meta">📍 Salon-de-Provence</div>
-<button class="green">Je veux venir</button>
-</div>
-
-<div class="card">
-<span class="badge">Concert</span>
-<div class="meta">📅 05 Juillet 2026</div>
-<h3>Concert plein air</h3>
-<div class="meta">📍 Parc municipal</div>
-<button class="brown">Je veux venir</button>
-</div>
-
-</div>
-
-<div class="side">
-<div class="join-card">
-
-  <div class="join-header">
-    <span class="join-icon">👥</span>
-    <h3>Rejoindre l’aventure</h3>
-  </div>
-
-  <p class="join-desc">
-    En devenant membre, vous soutenez l’association
-    et profitez d’avantages exclusifs.
-  </p>
-
-  <div class="join-list">
-    <div class="join-item"><span>✓</span> Accès aux événements</div>
-    <div class="join-item"><span>✓</span> Tarifs préférentiels</div>
-    <div class="join-item"><span>✓</span> Carte membre unique</div>
-    <div class="join-item"><span>✓</span> Rencontres privilégiées</div>
-    <div class="join-item"><span>✓</span> Soutien aux projets</div>
-  </div>
-
-  <a href="#" class="join-btn">
-    Rejoindre la communauté
-  </a>
-
-  <p class="join-footer">
-    Ensemble, faisons vibrer le handpan.
-    </p>
-
-  </div>
-
-</div>
-<!-- ABOUT -->
-<section class="section about container">
-
-  <div class="about-img">
-    <img src="b4_v3.png" alt="Shantipan">
-  </div>
-
-  <div>
-    <h2><span class="star">★</span> À propos de Shantipan Asso</h2>
-
-    <p>
-      Née en 2026 dans le sud de la France, Shantipan Asso fait vibrer le handpan sous toutes ses formes.<br><br>
-      Concerts intimistes, jams acoustiques, rencontres humaines… l’association crée des espaces où la musique devient partage.<br><br>
-      Ouverte à tous les niveaux, elle invite chacun à venir explorer, écouter ou jouer.
-    </p>
-
-    <p style="font-style:italic;color:#a46b3c;margin-top:20px;">
-      La musique nous relie, le handpan nous rassemble.
-    </p>
-  </div>
-
-</section>
-
-<!-- CALENDAR -->
-<section class="section calendar container">
-<div>
-<h3>Calendrier des événements</h3>
-<p>Mise à jour en temps réel</p>
-</div>
-
-<iframe src="https://calendar.google.com/calendar/embed?src=dG9tcmVib3Juc0BnbWFpbC5jb20&ctz=Europe/Paris"></iframe>
-</section>
-
-<!-- CONTACT -->
-<section class="contact">
-
-  <div class="contact-item">
-    <a href="https://instagram.com/shantipan_handpan" target="_blank">
-      📸
-      <p>Instagram</p>
-    </a>
-  </div>
-
-  <div class="contact-item">
-    <a href="mailto:Shantipan.asso@proton.me">
-      📧
-      <p>Shantipan.asso@proton.me</p>
-    </a>
-  </div>
-
-  <div class="contact-item">
-    <a href="tel:+33612345678">
-      📞
-      <p>06 12 34 56 78</p>
-    </a>
-  </div>
-
-</section>
-
-<!-- FOOTER -->
-<div class="footer">
-Merci de soutenir la musique et les rencontres humaines.
-</div>
-
-</body>
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-inner">
+        <p class="footer-left">
+          <span class="footer-heart">❤</span>Merci de soutenir la musique et les
+          rencontres humaines.
+        </p>
+        <p class="footer-right">© 2026 Shantipan Asso</p>
+      </div>
+    </div>
+  </body>
 </html>
